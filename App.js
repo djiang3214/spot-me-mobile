@@ -1,11 +1,71 @@
+import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Alert, Button, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const backgroundImage = {uri: 'https://wallpaperaccess.com/full/2581402.jpg'};
+const Stack = createStackNavigator();
 
-export default function App() {
-  return (
+function WelcomeScreen({navigation}){
+  return(
     <View style={styles.container}>
+    <ImageBackground source={backgroundImage} resizeMode="cover" style={styles.image}>
+      <Text style={styles.titleText}>Spot Me</Text>
+      <Text style={styles.bodyText}>Welcome!</Text>
+      <StatusBar style="auto"/>
+    <View style={styles.fixToText}>
+        <Button
+          title="Login"
+          onPress={() => navigation.navigate('Login')}
+          color="#808080"
+        />
+        <Button
+          title="Sign Up"
+          onPress={() => navigation.navigate('SignUp')}
+          color="#808080"
+        />
+    </View>
+    </ImageBackground>
+    </View>
+  );
+}
+
+function LoginScreen({navigation}){
+  return(
+    <View>
+    <Text style={styles.titleText}>Login Screen</Text>
+  </View>
+  );
+}
+
+function SignUpScreen({navigation}){
+  return(
+    <View>
+      <Text style={styles.titleText}>Sign Up Screen</Text>
+    </View>
+  );
+}
+
+function MyStack(){
+  return(
+    <Stack.Navigator>
+      <Stack.Screen name="Welcome" component={WelcomeScreen}/>
+      <Stack.Screen name="Login" component={LoginScreen}/>
+      <Stack.Screen name="SignUp" component={SignUpScreen}/>
+    </Stack.Navigator>
+  )
+}
+
+export default function App(){
+  return (
+    <NavigationContainer>
+    <MyStack/>
+    </NavigationContainer>
+  );
+}
+/*
+<View style={styles.container}>
     <ImageBackground source={backgroundImage} resizeMode="cover" style={styles.image}>
       <Text style={styles.titleText}>Spot Me</Text>
       <Text style={styles.bodyText}>Welcome!</Text>
@@ -24,10 +84,7 @@ export default function App() {
     </View>
     </ImageBackground>
     </View>
-    
-  );
-}
-
+*/
 const styles = StyleSheet.create({
   titleText:{
     fontSize: 40,
@@ -53,3 +110,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+ 
+
